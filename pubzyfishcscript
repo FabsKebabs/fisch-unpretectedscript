@@ -161,8 +161,10 @@ local AntiAFKConnection  -- Variable to store Anti-AFK connection
 
 
 -- Add Labels for user instructions
-Tab1:AddLabel("X - ON/OFF", Color3.fromRGB(127, 143, 166))
-Tab1:AddLabel("Hold Rod to Auto Farm", Color3.fromRGB(127, 143, 166))
+Tab1:AddLabel("X To Turn on Auto Farm (This auto Shakes too)", Color3.fromRGB(127, 143, 166))
+Tab1:AddLabel("Once auto cast is enabled do not Click the screen", Color3.fromRGB(127, 143, 166))
+Tab1:AddLabel("Press T To close Gui", Color3.fromRGB(127, 143, 166))
+Tab1:AddLabel("Press Right Shift to Open Gui", Color3.fromRGB(127, 143, 166))
 
 
 
@@ -375,23 +377,6 @@ Tab3:AddSlider({
 
 
 
-Tab3:AddToggle({
-    Name = "Noclip",
-    Default = NoclipEnabled,
-    Callback = function(State)
-        NoclipEnabled = State
-        if NoclipEnabled then
-         
-            LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Physics)
-            ShowNotification("Noclip Enabled")
-        else
-            
-            LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
-            ShowNotification("Noclip Disabled")
-        end
-    end
-})
-
 
 Tab3:AddToggle({
     Name = "Anti-Drown (Infinity Oxygen)",
@@ -419,3 +404,6 @@ Tab3:AddToggle({
         end
     end
 })
+
+
+
