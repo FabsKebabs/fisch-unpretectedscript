@@ -31,6 +31,7 @@ local Finished = false
 local LoopPosition = nil
 local Keybind = Enum.KeyCode.X
 local AutoCastEnabled = false
+local AutoCastDelay = 16 -- Default delay in seconds
 
 -- Function to show notifications
 function ShowNotification(String)
@@ -66,8 +67,6 @@ function ToggleAutoCast(Name, State, Input)
         ShowNotification(`Auto Cast: {AutoCastEnabled}`)
     end
 end
-
-local AutoCastDelay = 16 -- Default delay in seconds
 
 -- Auto Cast Logic: Hold mouse button, wait, and loop
 task.spawn(function()
@@ -119,7 +118,7 @@ end)
 -- Keep the player at the initial position while auto farming
 task.spawn(function()
     while true do
-        if Enabled and PositionLockEnabled then
+        if Enabled then
             LocalPlayer.Character.HumanoidRootPart.Position = LoopPosition
         end
         task.wait(0.75)
@@ -161,25 +160,24 @@ Tab1:AddToggle({
     Name = "Remove Lighting",
     Default = false,
     Callback = function(State)
+        local Lighting = game:GetService("Lighting")
         if State then
             -- Disable Lighting Effects
-            game.Lighting.Ambient = Color3.fromRGB(255, 255, 255)
-            game.Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
-            game.Lighting.Brightness = 0
-            game.Lighting.GlobalShadows = false
-            ShowNotification("Lighting Removed")
+            Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+            Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+            Lighting.Brightness = 5
+            Lighting.GlobalShadows = false
+            ShowNotification("Lighting Removed: Enabled")
         else
             -- Restore Default Lighting Settings
-            game.Lighting.Ambient = Color3.fromRGB(128, 128, 128)
-            game.Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
-            game.Lighting.Brightness = 2
-            game.Lighting.GlobalShadows = true
-            ShowNotification("Lighting Restored")
+            Lighting.Ambient = Color3.fromRGB(127, 127, 127)
+            Lighting.OutdoorAmbient = Color3.fromRGB(127, 127, 127)
+            Lighting.Brightness = 2
+            Lighting.GlobalShadows = true
+            ShowNotification("Lighting Removed: Disabled")
         end
     end
 })
-
-
 
 -- Add a slider for custom Auto Cast Delay
 Tab1:AddSlider({
@@ -193,24 +191,11 @@ Tab1:AddSlider({
     end
 })
 
-
-local AntiAFKConnection  -- Variable to store Anti-AFK connection
-
-
-
-
-
 -- Add Labels for user instructions
 Tab1:AddLabel("X To Turn on Auto Farm (This auto Shakes too)", Color3.fromRGB(127, 143, 166))
 Tab1:AddLabel("Once auto cast is enabled do not Click the screen", Color3.fromRGB(127, 143, 166))
 Tab1:AddLabel("Press T To close Gui", Color3.fromRGB(127, 143, 166))
 Tab1:AddLabel("Press Right Shift to Open Gui", Color3.fromRGB(127, 143, 166))
-
-
-
-
-
-
 
 -- TELEPORTS
 local Tab2 = Window:MakeTab({
