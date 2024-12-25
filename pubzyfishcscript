@@ -171,6 +171,15 @@ Tab1:AddSlider({
 
 local AntiAFKConnection  -- Variable to store Anti-AFK connection
 
+Tab1:AddToggle({
+    Name = "Enable Auto Farm",
+    Default = Enabled,
+    Callback = function(State)
+        print("Toggle state:", State)
+        Enabled = State
+        ShowNotification(`Status: {Enabled}`)
+    end
+})
 
 -- Add Toggle to Remove Lighting
 Tab1:AddToggle({
