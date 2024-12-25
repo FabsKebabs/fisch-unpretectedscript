@@ -172,6 +172,31 @@ Tab1:AddSlider({
 local AntiAFKConnection  -- Variable to store Anti-AFK connection
 
 
+-- Add Toggle to Remove Lighting
+Tab1:AddToggle({
+    Name = "Remove Lighting",
+    Default = false,
+    Callback = function(State)
+        if State then
+            -- Disable Lighting Effects
+            game.Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+            game.Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+            game.Lighting.Brightness = 0
+            game.Lighting.GlobalShadows = false
+            ShowNotification("Lighting Removed")
+        else
+            -- Restore Default Lighting Settings
+            game.Lighting.Ambient = Color3.fromRGB(128, 128, 128)
+            game.Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+            game.Lighting.Brightness = 2
+            game.Lighting.GlobalShadows = true
+            ShowNotification("Lighting Restored")
+        end
+    end
+})
+
+
+
 
 -- Add Labels for user instructions
 Tab1:AddLabel("X To Turn on Auto Farm (This auto Shakes too)", Color3.fromRGB(127, 143, 166))
