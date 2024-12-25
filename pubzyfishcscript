@@ -156,31 +156,6 @@ Tab1:AddToggle({
     end
 })
 
--- Add a slider for custom Auto Cast Delay
-Tab1:AddSlider({
-    Name = "Auto Cast Delay (Seconds)",
-    Min = 6,
-    Max = 17,
-    Default = AutoCastDelay,
-    Increment = 1,
-    Callback = function(Value)
-        AutoCastDelay = Value
-    end
-})
-
-
-local AntiAFKConnection  -- Variable to store Anti-AFK connection
-
-Tab1:AddToggle({
-    Name = "Enable Auto Farm",
-    Default = Enabled,
-    Callback = function(State)
-        print("Toggle state:", State)
-        Enabled = State
-        ShowNotification(`Status: {Enabled}`)
-    end
-})
-
 -- Add Toggle to Remove Lighting
 Tab1:AddToggle({
     Name = "Remove Lighting",
@@ -203,6 +178,24 @@ Tab1:AddToggle({
         end
     end
 })
+
+
+
+-- Add a slider for custom Auto Cast Delay
+Tab1:AddSlider({
+    Name = "Auto Cast Delay (Seconds)",
+    Min = 6,
+    Max = 17,
+    Default = AutoCastDelay,
+    Increment = 1,
+    Callback = function(Value)
+        AutoCastDelay = Value
+    end
+})
+
+
+local AntiAFKConnection  -- Variable to store Anti-AFK connection
+
 
 
 
